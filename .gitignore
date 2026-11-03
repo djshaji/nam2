@@ -1,0 +1,23 @@
+# Gradle caches and generated build output
+/.gradle/
+/.gradle-local/
+**/build/
+**/.cxx/
+**/.externalNativeBuild/
+
+# Local Android SDK configuration and signing credentials
+/local.properties
+*.jks
+*.keystore
+/keystore.properties
+
+# IDE and editor files
+.idea/
+*.iml
+*.swp
+*.swo
+*~
+
+# Operating system metadata
+.DS_Store
+Thumbs.db
