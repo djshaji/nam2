@@ -12,7 +12,9 @@ if(NOT namcore_POPULATED)
 endif()
 # Upstream root builds desktop tools; compile only the inference runtime on Android.
 file(GLOB NAM_SOURCES CONFIGURE_DEPENDS "${namcore_SOURCE_DIR}/NAM/*.cpp" "${namcore_SOURCE_DIR}/NAM/*.c" "${namcore_SOURCE_DIR}/NAM/*/*.cpp")
-add_library(nam_runtime STATIC ${NAM_SOURCES})
+# Include every runtime object: architecture parsers register via static initializers,
+# which a static archive linker can otherwise discard as unreferenced.
+add_library(nam_runtime OBJECT ${NAM_SOURCES})
 target_include_directories(nam_runtime PUBLIC "${namcore_SOURCE_DIR}" "${namcore_SOURCE_DIR}/Dependencies/eigen" "${namcore_SOURCE_DIR}/Dependencies/nlohmann")
 target_compile_definitions(nam_runtime PUBLIC NAM_SAMPLE_FLOAT NAM_ENABLE_A2_FAST)
 set_target_properties(nam_runtime PROPERTIES POSITION_INDEPENDENT_CODE ON)
